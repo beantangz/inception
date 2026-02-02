@@ -9,8 +9,8 @@ RUN apt update && apt install -y \
 	mariadb-client \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/*
-	
-RUN sed -i 's|listen = .*|listen = 9000|' /etc/php/8.2/fpm/pool.d/www.conf
+
+RUN sed -i 's|listen = .*|listen = 0.0.0.0:9000|' /etc/php/8.2/fpm/pool.d/www.conf
 
 RUN mkdir -p /run/php
 

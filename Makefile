@@ -21,9 +21,6 @@ rebuild:
 down:
 	@$(COMPOSE) down
 
-stop:
-	@$(COMPOSE) stop
-
 restart: down up
 
 clean:
@@ -35,10 +32,4 @@ fclean: clean
 
 re: fclean all
 
-ps:
-	@$(COMPOSE) ps
 
-logs:
-	@$(COMPOSE) logs
-
-.PHONY: all up build down stop restart clean fclean re ps logs

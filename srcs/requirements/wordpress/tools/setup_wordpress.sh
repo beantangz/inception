@@ -2,9 +2,15 @@
 
 set -e
 
-until mysqladmin ping -h mariadb -u$MYSQL_USER -p$MYSQL_PASSWORD --silent; do
-	echo "Waiting for MariaDB..."
-	sleep 1
+DB_HOSTNAME="${DB_HOST%%:*}"
+DB_PORT="${DB_HOST##*:}"
+if [ "$DB_PORT" = "$DB_HOSTNAME" ]; then
+    DB_PORT=3306
+fi
+
+until mysqladmin ping -h "$DB_HOSTNAME" -P "$DB_PORT" -u$MYSQL_USER -p$MYSQL_PASSWORD --silent; do
+    echo "Waiting for MariaDB..."
+    sleep 1
 done
 
 cd /var/www/html
@@ -16,7 +22,7 @@ if [ ! -f wp-config.php ]; then
 		--dbname=$MYSQL_DATABASE \
 		--dbuser=$MYSQL_USER \
 		--dbpass=$MYSQL_PASSWORD \
-		--dbhost=mariadb \
+		--dbhost=$DB_HOST \
 		--allow-root
 
 	wp core install \
