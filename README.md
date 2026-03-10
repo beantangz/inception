@@ -1,10 +1,9 @@
-*This project has been created as part of the 42 curriculum by mleineku.*
 
-# Inception
+# Living Website
 
 ## Description
 
-Inception deploys a WordPress website using **Docker containers**:
+This project deploys a WordPress website using **Docker containers**:
 
 - **WordPress + PHP-FPM**  
 - **MariaDB**  
